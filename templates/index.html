@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Marks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* Add a wrapper to center the form and total marks */
+        .form-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            max-width: 1500px !important;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #usn {
+            background-color: red;
+            color: white;
+            padding: 35px;
+            font-weight: bold;
+        }
+
+        #subject-code {
+            margin: 25px;
+            padding: 10px;
+        }
+
+        .question-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-left: 30px;
+            padding: 10px;
+        }
+
+        .question-number {
+            font-weight: bold;
+            font-size: 20px;
+            margin-right: 10px;
+            width: 50px;
+        }
+
+        .subquestion-input {
+            width: 70px;
+            height: 28px;
+            border: 1px solid gray; /* Added full border in light gray color */
+            border-radius: 4px;
+            text-align: center;
+            margin-right: 30px;
+        }
+
+        .question-total {
+            width: 70px;
+            height: 28px;
+            text-align: center;
+        }
+
+        #total-marks {
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            font-size: 20px;
+            color: black;
+            margin-top: 30px;
+            margin-left: 125px; /* Add some top margin to create space */
+        }
+
+        #total-marks-input {
+            padding: 10px;
+        }
+
+        input[type="number"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Enter Marks</h1>
+    <div class="form-wrapper">
+        <form action="/submit" method="POST">
+            <div id="usn">USN: {{usn}}</div>
+            <label for="subject-code">Subject Code:</label>
+            <input type="text" id="subject-code" name="subject-code" value="{{subcode}}" required>
+
+            <!-- Question 1 -->
+            <div class="question-container">
+              <div class="question-number">Q1:</div>
+              <input type="text" class="subquestion-input" name="q1s1" value="{{ split_marks1[0] }}" required>
+              <input type="text" class="subquestion-input" name="q1s2" value="{{ split_marks1[1] }}" required>
+              <input type="text" class="subquestion-input" name="q1s3" value="{{ split_marks1[2] }}" required>
+              <div class="question-total">Total:</div>
+              <input type="text" class="question-total" name="q1-total" value="{{ total[0] }}" readonly>
+          </div>
+
+            <!-- Question 2 -->
+        <div class="question-container">
+          <div class="question-number">Q2:</div>
+          <input type="text" class="subquestion-input" name="q2s1" value="{{split_marks1[3]}}" required>
+          <input type="text" class="subquestion-input" name="q2s2" value="{{split_marks1[4]}}" required>
+          <input type="text" class="subquestion-input" name="q2s3" value="{{split_marks1[5]}}"required>
+          <div class="question-total">Total:</div>
+          <input type="text" class="question-total" name="q2-total" value="{{total[1]}}" readonly>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question-container">
+          <div class="question-number">Q3:</div>
+          <input type="text" class="subquestion-input" name="q3s1" value="{{split_marks1[6]}}" required>
+          <input type="text" class="subquestion-input" name="q3s2" value="{{split_marks1[7]}}" required>
+          <input type="text" class="subquestion-input" name="q3s3" value="{{split_marks1[8]}}" required>
+          <div class="question-total">Total:</div>
+          <input type="text" class="question-total" name="q3-total" value="{{total[2]}}"readonly>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question-container">
+          <div class="question-number">Q4:</div>
+          <input type="text" class="subquestion-input" name="q4s1" value="{{split_marks1[9]}}"  required>
+          <input type="text" class="subquestion-input" name="q4s2" value="{{split_marks1[10]}}"  required>
+          <input type="text" class="subquestion-input" name="q4s3" value="{{split_marks1[11]}}" required>
+          <div class="question-total">Total:</div>
+          <input type="text" class="question-total" name="q4-total" value="{{total[3]}}" readonly>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question-container">
+          <div class="question-number">Q5:</div>
+          <input type="text" class="subquestion-input" name="q5s1" value="{{split_marks2[0]}}" required>
+          <input type="text" class="subquestion-input" name="q5s2" value="{{split_marks2[1]}}" required>
+          <input type="text" class="subquestion-input" name="q5s3"value="{{split_marks2[2]}}" required>
+          <div class="question-total">Total:</div>
+          <input type="text" class="question-total" name="q5-total" value="{{total[4]}}" readonly>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="question-container">
+          <div class="question-number">Q6:</div>
+          <input type="text" class="subquestion-input" name="q6s1"value="{{split_marks2[3]}}" required>
+          <input type="text" class="subquestion-input" name="q6s2"value="{{split_marks2[4]}}" required>
+          <input type="text" class="subquestion-input" name="q6s3"value="{{split_marks2[5]}}" required>
+          <div class="question-total">Total:</div>
+          <input type="text" class="question-total" name="q6-total" value="{{total[5]}}" readonly>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="question-container">
+          <div class="question-number">Q7:</div>
+          <input type="text" class="subquestion-input" name="q7s1"value="{{split_marks2[6]}}" required>
+          <input type="text" class="subquestion-input" name="q7s2"value="{{split_marks2[7]}}" required>
+          <input type="text" class="subquestion-input" name="q7s3"value="{{split_marks2[8]}}" required>
+          <div class="question-total">Total:</div>
+          <input type="text" class="question-total" name="q7-total"value="{{total[6]}}" readonly>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="question-container">
+          <div class="question-number">Q8:</div>
+          <input type="text" class="subquestion-input" name="q8s1"value="{{split_marks2[9]}}" required>
+          <input type="text" class="subquestion-input" name="q8s2"value="{{split_marks2[10]}}" required>
+          <input type="text" class="subquestion-input" name="q8s3"value="{{split_marks2[11]}}" required>
+          <div class="question-total">Total:</div>
+          <input type="text" class="question-total" name="q8-total"value="{{total[7]}}" readonly>
+      </div>
+
+
+            <div id="total-marks">
+                Total Marks: <input type="text" id="total-marks-input" name="total-marks" value="{{final_marks}}" readonly>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+
+</html>
